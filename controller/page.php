@@ -20,7 +20,6 @@ get('/userlist', function() {
     views('admin/userList');
 });
 
-
 post('/join', function() {
     extract($_POST);
 
