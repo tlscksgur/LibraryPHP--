@@ -1,0 +1,42 @@
+*{margin: 0;padding: 0;list-style: none;text-decoration: none;box-sizing: border-box;color: inherit;}
+
+.flex{display: flex;}
+.fxc{display: flex; justify-content: center; align-items: center;}
+.jcc{justify-content: center;}
+.jcb{justify-content: space-between;}
+.jca{justify-content: space-around;}
+.jce{justify-content: space-evenly;}
+.aic{align-items: center;}
+.fd{flex-direction: column;}
+
+.tac{text-align: center;}
+.m0a{margin: 0 auto;}
+.mt20{margin-top: 20px;}
+
+.fb{font-weight: bold;}
+.fz25{font-size: 25px;}
+
+body{display: flex; flex-direction: column; width: 100vw; height: 100vh;}
+
+header{display: flex; justify-content: center; align-items: center; width: 100%; height: 80px; background-color: lightseagreen; color: #fff; font-weight: bold;}
+header ul{display: flex; justify-content: space-between; width: max-content;}
+header ul li{padding: 8px;}
+
+main{display: flex; justify-content: center; align-items: center; flex: 1; flex-grow: 1;}
+#section{height: 500px;}
+
+footer{width: 100%; height: 80px; background-color: deepskyblue; text-align: center; line-height: 80px; font-weight: bold; font-size: 25px;}
+
+table, tr, th, td{border: 1px solid;}
+
+
+/* php */
+
+.content{display: flex; justify-content: space-between; width: 1000px; height: max-content;}
+.userList{width: max-content; height: max-content; background-color: lightgray; color: #fff; font-weight: bold;}
+.userList ul{display: flex; flex-direction: column;}
+.userList li{padding: 5px;}
+
+.managerList{width: max-content; height: max-content; background-color: lightgray; color: #fff; font-weight: bold;}
+.managerList ul{display: flex; flex-direction: column;}
+.managerList li{padding: 5px;}
