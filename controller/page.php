@@ -19,12 +19,12 @@ get('/libraryManager', function() {
 get('/userlist', function() {
     views('admin/userList');
 });
-get('/libraryFix', function() {
-    $idx = $_GET['idx'];
-    $lib = DB::fetch("SELECT * FROM library WHERE idx = '$idx'");
-
-    views('admin/libraryFix', compact('lib'));
-});
+// get('/libraryFix', function() {
+//     echo 'HERE'; exit;
+     // $idx = $_GET['idx'];
+     // $lib = DB::fetch("SELECT * FROM library WHERE idx = '$idx'");
+     // views('admin/libraryFix', compact('lib'));
+// });
 
 post('/join', function() {
     extract($_POST);
@@ -68,26 +68,39 @@ post('/managerAdd', function() {
 });
 
 post('/libraryAdd', function() {
-   extract($_POST);
-   
+    extract($_POST);
+
     $from = $_FILES['logo']['tmp_name'];
     $img = $_FILES['logo']['name'];
 
     move_uploaded_file($from, 'uploads/' . $img);
 
-   DB::exec("INSERT INTO library (libraryName, logo) values ('$libraryName', '$img')");
+    DB::exec("INSERT INTO library (libraryName, logo) values ('$libraryName', '$img')");
 
-   move('/', '도서관 등록');
+    back('도서관 등록');
 });
 
 post('/libraryFix', function() {
-   extract($_POST);
+    extract($_POST);
 
-   
-    
+    $lib = DB::fetch("SELECT logo FROM library WHERE idx='$idx'");
+    $img = $lib->logo;
+
+    if (!empty($_FILES['logo']['name'])) {
+        $from = $_FILES['logo']['tmp_name'];
+        $img = $_FILES['logo']['name'];
+        move_uploaded_file($from, 'public/uploads/' . $img);
+    }
+
+    DB::exec("UPDATE library SET libraryName='$libraryName', logo='$img' WHERE idx='$idx'");
+
+    move('/', '서점 수정 완료');
 });
 
+
 post('/libraryDel', function() {
-   extract($_POST);
-   
+    extract($_POST);
+
+    DB::exec("DELETE FROM library where idx = '$idx'");
+    back('삭제');
 });
