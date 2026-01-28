@@ -40,3 +40,8 @@ table, tr, th, td{border: 1px solid;}
 .managerList{width: max-content; height: max-content; background-color: lightgray; color: #fff; font-weight: bold;}
 .managerList ul{display: flex; flex-direction: column;}
 .managerList li{padding: 5px;}
+
+.libDataSection{display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 1000px; margin: 0 auto;}
+.libContent{width: 200px; height: max-content; border: 1px solid; border-radius: 20px; text-align: center;}
+.libContent>div{padding: 10px;}
+.libImg img{width: 70px;}

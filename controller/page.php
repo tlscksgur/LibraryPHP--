@@ -19,6 +19,12 @@ get('/libraryManager', function() {
 get('/userlist', function() {
     views('admin/userList');
 });
+get('/libraryFix', function() {
+    $idx = $_GET['idx'];
+    $lib = DB::fetch("SELECT * FROM library WHERE idx = '$idx'");
+
+    views('admin/libraryFix', compact('lib'));
+});
 
 post('/join', function() {
     extract($_POST);
@@ -59,4 +65,29 @@ post('/managerAdd', function() {
     DB::exec("INSERT INTO library (libraryName, logo, managerId, managerPw) values ('$libraryName','$logo','$managerId','$managerPw')");
     
     move('/', '관리자 등록');
+});
+
+post('/libraryAdd', function() {
+   extract($_POST);
+   
+    $from = $_FILES['logo']['tmp_name'];
+    $img = $_FILES['logo']['name'];
+
+    move_uploaded_file($from, 'uploads/' . $img);
+
+   DB::exec("INSERT INTO library (libraryName, logo) values ('$libraryName', '$img')");
+
+   move('/', '도서관 등록');
+});
+
+post('/libraryFix', function() {
+   extract($_POST);
+
+   
+    
+});
+
+post('/libraryDel', function() {
+   extract($_POST);
+   
 });
