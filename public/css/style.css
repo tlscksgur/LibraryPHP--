@@ -51,7 +51,7 @@ table, tr, th, td{border: 1px solid;}
 
 /* 서점관리자 */
 .bookListSection{display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 auto; width: 80%; height: max-content;}
-.content{display: flex; flex-direction: column; width: 300px; height: max-content; text-align: center; border: 1px solid;}
-.content div{padding: 10px;}
+.bookListContent{display: flex; flex-direction: column; width: 300px; height: max-content; text-align: center; border: 1px solid;}
+.bookListContent div{padding: 10px;}
 .content img{width: 100px;}
 /* 서점관리자 */

@@ -33,7 +33,7 @@
 <?php $bookList = DB::fetchAll("SELECT * FROM book") ?>
 <section class="bookListSection">
     <?php foreach($bookList as $BL): ?>
-        <div class="content">
+        <div class="bookListContent">
             <div><img src="./uploads/<?= $BL -> bookImg?>"></div>
             <div><?= $BL -> bookName ?></div>
             <div><?= $BL -> content ?></div>
@@ -45,9 +45,7 @@
                     '<?= htmlspecialchars($BL->content, ENT_QUOTES) ?>',
                     <?= $BL->totalCount ?>
                 )">
-                <input type="button" value="삭제"
-                    onclick="bookDel(idx)"
-                >
+                <input type="button" value="삭제" onclick="bookDel(<?= $BL -> idx ?>)">
             </div>
         </div>
     <?php endforeach; ?>
@@ -65,17 +63,19 @@
     }
 
     function bookDel(idx) {
-        const form = newEL('form', {
+        const form = newEl('form', {
             method: "post",
             action: "/deleteBook"
         })
         const input = newEl('input', {
             type: "hidden",
             name: "idx",
-            value: "idx"
+            value: idx
         })
 
-        form.appenChild(input);
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
     }
 
 </script>

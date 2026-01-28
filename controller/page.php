@@ -162,8 +162,8 @@ post('/bookFix', function() {
 post('/deleteBook', function() {
     extract($_POST);
 
-    DB::exec("");
-    
+    DB::exec("DELETE FROM book where idx = '$idx'");
+    back("책 삭제");
 });
 
 /* 서점 관리자 */
