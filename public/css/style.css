@@ -32,6 +32,7 @@ table, tr, th, td{border: 1px solid;}
 
 /* php */
 
+/* 슈퍼관리자 */
 .content{display: flex; justify-content: space-between; width: 1000px; height: max-content;}
 .userList{width: max-content; height: max-content; background-color: lightgray; color: #fff; font-weight: bold;}
 .userList ul{display: flex; flex-direction: column;}
@@ -45,3 +46,12 @@ table, tr, th, td{border: 1px solid;}
 .libContent{width: 200px; height: max-content; border: 1px solid; border-radius: 20px; text-align: center;}
 .libContent>div{padding: 10px;}
 .libImg img{width: 70px;}
+/* 슈퍼관리자 */
+
+
+/* 서점관리자 */
+.bookListSection{display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 auto; width: 80%; height: max-content;}
+.content{display: flex; flex-direction: column; width: 300px; height: max-content; text-align: center; border: 1px solid;}
+.content div{padding: 10px;}
+.content img{width: 100px;}
+/* 서점관리자 */

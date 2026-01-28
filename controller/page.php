@@ -125,6 +125,37 @@ post('/bookAdd', function() {
     extract($_POST);
 
     $libraryIdx = ss()->idx;
+    $img = '';
 
-    
+    if(!empty($_FILES['bookImg']['name'])) {
+        $from = $_FILES['bookImg']['tmp_name'];
+        $img = $_FILES['bookImg']['name'];
+        move_uploaded_file($from, 'uploads/' . $img);
+    }
+
+    DB::exec("
+        INSERT INTO book 
+        (libraryIdx, bookName, content, bookImg, totalCount, nowRentCount)
+        values
+        ('$libraryIdx', '$bookName', '$content', '$img', '$count', '$count')
+    ");
+    back('책추가!');
 });
+
+post('/bookFix', function() {
+    extract($_POST);
+
+    $book = DB::fetch("SELECT * FROM book where idx = '$idx'");
+    $bookImg = $book->bookImg;
+
+    if(!empty($_FILES['bookImg']['tmp_name'])) {
+        $from = $_FILES['bookImg']['tmp_name'];
+        $img = $_FILES['bookImg']['name'];
+        move_uploaded_file($from, 'uploads/' . $img);
+    }
+
+    DB::exec("UPDATE book SET bookName='$bookName', content='$content', bookImg='$img', totalCount='$count' where idx = '$idx' ");
+
+    back('책 정보가 수정되었습니다.');
+});
+/* 서점 관리자 */

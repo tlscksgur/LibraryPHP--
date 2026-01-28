@@ -45,7 +45,7 @@
 
     function libraryFix(idx, name) {
         $('#libIdx').value = idx;
-        $('#libraryName').value = name;
+        $('#libraryName').value = name
 
         $('#libForm').action = '/libraryFix';
         $('#formTitle').innerText = '서점 수정';
