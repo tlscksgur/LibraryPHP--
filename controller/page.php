@@ -13,12 +13,27 @@ get('/logout', function() {
     session_destroy();
     move('/', '로그아웃');
 });
-get('/libraryManager', function() {
+
+
+get('/admin', function() {
     views('admin/admin');
 });
 get('/userlist', function() {
     views('admin/userList');
 });
+
+
+get('/bookAdd', function() {
+    views('manager/bookAdd');
+});
+get('/calendar', function() {
+    views('manager/calendar');
+});
+get('/rentUserSelect', function() {
+    views('manager/rentUserSelect');
+});
+
+
 // get('/libraryFix', function() {
 //     echo 'HERE'; exit;
      // $idx = $_GET['idx'];
@@ -53,7 +68,7 @@ post('/login', function() {
     move('/', '로그인 성공');
 });
 
-
+/* 슈퍼관리자 */
 post('/managerAdd', function() {
     extract($_POST);
 
@@ -94,13 +109,22 @@ post('/libraryFix', function() {
 
     DB::exec("UPDATE library SET libraryName='$libraryName', logo='$img' WHERE idx='$idx'");
 
-    move('/', '서점 수정 완료');
+    back('서점 수정 완료');
 });
-
 
 post('/libraryDel', function() {
     extract($_POST);
 
     DB::exec("DELETE FROM library where idx = '$idx'");
     back('삭제');
+});
+/* 슈퍼관리자 */
+
+/* 서점 관리자 */
+post('/bookAdd', function() {
+    extract($_POST);
+
+    $libraryIdx = ss()->idx;
+
+    
 });
