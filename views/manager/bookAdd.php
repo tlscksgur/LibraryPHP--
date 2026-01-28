@@ -65,7 +65,17 @@
     }
 
     function bookDel(idx) {
+        const form = newEL('form', {
+            method: "post",
+            action: "/deleteBook"
+        })
+        const input = newEl('input', {
+            type: "hidden",
+            name: "idx",
+            value: "idx"
+        })
 
+        form.appenChild(input);
     }
 
 </script>

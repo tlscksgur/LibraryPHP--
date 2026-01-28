@@ -158,4 +158,12 @@ post('/bookFix', function() {
 
     back('책 정보가 수정되었습니다.');
 });
+
+post('/deleteBook', function() {
+    extract($_POST);
+
+    DB::exec("");
+    
+});
+
 /* 서점 관리자 */
