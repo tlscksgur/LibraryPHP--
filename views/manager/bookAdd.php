@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <th>책 수량</th>
-                <td><input type="number" name="count" id="count"></td>
+                <td><input type="number" name="count" min="1" id="count"></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
