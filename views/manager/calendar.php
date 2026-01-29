@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
     $libraryIdx = ss()->idx;
     $rents = DB::fetchAll("
         SELECT r.idx, r.rentDate, r.dueDate, u.name as userName, b.bookName
@@ -13,6 +13,7 @@
     $year = $_GET['year'] ?? date('Y');
     $month = $_GET['month'] ?? date('m');
     $day = 1;
+    $end = false;
 
     $firstDay = strtotime("$year-$month-01");
     $startWeek = date('w', $firstDay);
@@ -20,16 +21,16 @@
 
     $prevYear = $month == 1 ? $year - 1 : $year;    
     $prevMonth = $month == 1 ? 12 : $month - 1;
-    $nextYear = $month == 12 ? $yaer + 1 : $year;
+    $nextYear = $month == 12 ? $year + 1 : $year;
     $nextMonth = $month == 12 ? 1 : $month + 1;
 ?>
 
 <main id="calendar">
     <div class="calendarIn">
         <div class="calendarHeader tac">
-            <a href="/calendar?year=<?= $prevYear ?>&month=<?= $prevMonth ?>">◀ 이전</a>
+            <a href="/calendar?year=<?= $prevYear ?>&month=<?= $prevMonth ?>"><b>&lt;</b> 이전</a>
             <span class="currentMonth"><?= $year ?>년 <?= $month ?>월</span>
-            <a href="/calendar?year=<?= $nextYear ?>&month=<?= $nextMonth ?>">다음 ▶</a>
+            <a href="/calendar?year=<?= $nextYear ?>&month=<?= $nextMonth ?>">다음 <b>&gt;</b></a>
         </div>
         <table id="table">
             <tr>
@@ -42,7 +43,7 @@
                 <th>토</th>
             </tr>
             <?php
-            for ($row = 0; $row < 5; $row++) {
+            for ($row = 0; $row < 6; $row++) {
                 echo "<tr>";
 
                 for ($col = 0; $col < 7; $col++) {
@@ -74,8 +75,12 @@
                 }
 
                 echo "</tr>";
+                
+                if($end && $today > $lastDay) break;
             }
             ?>
         </table>
     </div>
 </main>
+
+

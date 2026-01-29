@@ -58,10 +58,12 @@ table, tr, th, td{border: 1px solid;}
 
 #calendar #table, tr, th, td{border: 1px solid;}
 #calendar #table{text-align: center;}
-#calendar td{padding: 45px;}
+#calendar td{padding: 40px;}
 
 .calendarHeader{display: flex; justify-content: space-between; align-items: center; margin: 20px 0;}
 .currentMonth{font-weight: bold; font-size: 20px;}
 .calendarHeader a{padding: 5px 10px; border: 1px solid; border-radius: 10px;}
 
+tr:has(td:not(:empty)){display:table-row;}
+tr:not(:has(td:not(:empty))){display:none;}
 /* 서점관리자 */

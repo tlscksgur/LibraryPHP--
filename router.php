@@ -9,7 +9,8 @@ class router{
 
   static function handleRequest() {
     $REQUEST_METHOD = $_SERVER['REQUEST_METHOD'];
-    $REQUEST_URI = $_SERVER['REQUEST_URI'];
+    // Ignore query string when matching routes (e.g. /calendar?year=...).
+    $REQUEST_URI = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
     foreach(self::$routes as $r) {
       [$reqM, $uri, $hdl] = $r;
