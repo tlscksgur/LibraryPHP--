@@ -34,6 +34,13 @@ get('/rentUserSelect', function() {
 });
 
 
+get('/userProfile', function() {
+    $idx = $_GET['idx'];
+    $user = DB::fetch("SELECT * FROM user WHERE idx = '$idx'");
+    views('user/userProfile', compact('user'));
+});
+
+
 // get('/libraryFix', function() {
 //     echo 'HERE'; exit;
      // $idx = $_GET['idx'];
@@ -165,5 +172,8 @@ post('/deleteBook', function() {
     DB::exec("DELETE FROM book where idx = '$idx'");
     back("책 삭제");
 });
+
+
+
 
 /* 서점 관리자 */

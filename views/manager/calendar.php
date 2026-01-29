@@ -1,5 +1,7 @@
-﻿<?php 
-    $libraryIdx = ss()->idx;
+﻿<?php
+    $libraryIdxQuery = DB::fetch("SELECT idx from library where managerId = '".ss()->id."' ");
+    $libraryIdx = $libraryIdxQuery->idx;
+
     $rents = DB::fetchAll("
         SELECT r.idx, r.rentDate, r.dueDate, u.name as userName, b.bookName
         from rent r
@@ -10,6 +12,7 @@
         where r.libraryIdx = {$libraryIdx}
     ");
 
+
     $year = $_GET['year'] ?? date('Y');
     $month = $_GET['month'] ?? date('m');
     $day = 1;
@@ -19,7 +22,7 @@
     $startWeek = date('w', $firstDay);
     $lastDay = date('t', $firstDay);
 
-    $prevYear = $month == 1 ? $year - 1 : $year;    
+    $prevYear = $month == 1 ? $year - 1 : $year;
     $prevMonth = $month == 1 ? 12 : $month - 1;
     $nextYear = $month == 12 ? $year + 1 : $year;
     $nextMonth = $month == 12 ? 1 : $month + 1;
@@ -43,6 +46,7 @@
                 <th>토</th>
             </tr>
             <?php
+
             for ($row = 0; $row < 6; $row++) {
                 echo "<tr>";
 
@@ -56,15 +60,14 @@
                         echo "<td>";
                         echo "<strong>$day</strong>";
 
-                        foreach ($rents as $r) {
-                            $start = strtotime($r->rentDate);
-                            $end = strtotime($r->dueDate);
-                            $current = strtotime("$year-$month-$day");
+                        $currentDate = sprintf('%04d-%02d-%02d', $year, $month, $day);
 
-                            if ($current >= $start && $current <= $end) {
+                        foreach ($rents as $r) {
+                            if ($currentDate >= $r->rentDate && $currentDate <= $r->dueDate) {
                                 echo "<div class='rent'>";
-                                echo htmlspecialchars($r->bookName);
-                                echo "<br>(" . htmlspecialchars($r->userName) . ")";
+                                echo "<a href='/userProfile?idx={$r->idx}'>";
+                                echo htmlspecialchars($r->userName);
+                                echo "</a>";
                                 echo "</div>";
                             }
                         }
@@ -75,12 +78,8 @@
                 }
 
                 echo "</tr>";
-                
-                if($end && $today > $lastDay) break;
             }
             ?>
         </table>
     </div>
 </main>
-
-

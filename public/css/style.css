@@ -55,14 +55,17 @@ table, tr, th, td{border: 1px solid;}
 .bookListContent div{padding: 10px;}
 .bookListContent img{width: 100px;}
 
-
+#calendar{width: 100vw; height: 100vh; margin: 0 auto;}
+.calendarIn{width: max-content; height: 700px;}
 #calendar #table, tr, th, td{border: 1px solid;}
 #calendar #table{text-align: center;}
-#calendar td{padding: 40px;}
+#calendar td{padding: 35px;}
 
 .calendarHeader{display: flex; justify-content: space-between; align-items: center; margin: 20px 0;}
 .currentMonth{font-weight: bold; font-size: 20px;}
 .calendarHeader a{padding: 5px 10px; border: 1px solid; border-radius: 10px;}
+
+.rent{margin-top:5px; padding:3px; background:#eef; font-size:12px;}
 
 tr:has(td:not(:empty)){display:table-row;}
 tr:not(:has(td:not(:empty))){display:none;}
