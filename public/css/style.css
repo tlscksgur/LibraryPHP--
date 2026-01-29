@@ -56,7 +56,12 @@ table, tr, th, td{border: 1px solid;}
 .bookListContent img{width: 100px;}
 
 
-#calendar #table, tr, th, td{border: none;}
+#calendar #table, tr, th, td{border: 1px solid;}
+#calendar #table{text-align: center;}
+#calendar td{padding: 45px;}
 
+.calendarHeader{display: flex; justify-content: space-between; align-items: center; margin: 20px 0;}
+.currentMonth{font-weight: bold; font-size: 20px;}
+.calendarHeader a{padding: 5px 10px; border: 1px solid; border-radius: 10px;}
 
 /* 서점관리자 */

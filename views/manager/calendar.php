@@ -1,17 +1,36 @@
 <?php 
-$rents = DB::fetchAll("
-    SELECT r.idx, r.rentDate, r.dueDate, u.name as userName, b.bookName
-    from rent r
-    join user u 
-    on i.idx = r.userIdx
-    join book b
-    on b.idx = r.bookIdx
-    where r.libraryIdx = {$libraryIdx}
-");
+    $libraryIdx = ss()->idx;
+    $rents = DB::fetchAll("
+        SELECT r.idx, r.rentDate, r.dueDate, u.name as userName, b.bookName
+        from rent r
+        join user u 
+        on u.idx = r.userIdx
+        join book b
+        on b.idx = r.bookIdx
+        where r.libraryIdx = {$libraryIdx}
+    ");
+
+    $year = $_GET['year'] ?? date('Y');
+    $month = $_GET['month'] ?? date('m');
+    $day = 1;
+
+    $firstDay = strtotime("$year-$month-01");
+    $startWeek = date('w', $firstDay);
+    $lastDay = date('t', $firstDay);
+
+    $prevYear = $month == 1 ? $year - 1 : $year;    
+    $prevMonth = $month == 1 ? 12 : $month - 1;
+    $nextYear = $month == 12 ? $yaer + 1 : $year;
+    $nextMonth = $month == 12 ? 1 : $month + 1;
 ?>
 
 <main id="calendar">
     <div class="calendarIn">
+        <div class="calendarHeader tac">
+            <a href="/calendar?year=<?= $prevYear ?>&month=<?= $prevMonth ?>">◀ 이전</a>
+            <span class="currentMonth"><?= $year ?>년 <?= $month ?>월</span>
+            <a href="/calendar?year=<?= $nextYear ?>&month=<?= $nextMonth ?>">다음 ▶</a>
+        </div>
         <table id="table">
             <tr>
                 <th>일</th>
@@ -23,15 +42,7 @@ $rents = DB::fetchAll("
                 <th>토</th>
             </tr>
             <?php
-            $year = $_GET['year'] ?? date('Y');
-            $month = $_GET['month'] ?? date('m');
-            $day = 1;
-
-            $firstDay = strtotime("$year-$month-01");
-            $startWeek = date('w', $firstDay);
-            $lastDay = date('t', $firstDay);
-
-            for ($row = 0; $row < 6; $row++) {
+            for ($row = 0; $row < 5; $row++) {
                 echo "<tr>";
 
                 for ($col = 0; $col < 7; $col++) {
