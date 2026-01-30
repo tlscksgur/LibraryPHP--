@@ -1,15 +1,15 @@
 ﻿<?php
-    $libraryIdxQuery = DB::fetch("SELECT idx from library where managerId = '".ss()->id."' ");
-    $libraryIdx = $libraryIdxQuery->idx;
+    $libraryIdx = ss()->idx;
 
     $rents = DB::fetchAll("
-        SELECT r.idx, r.rentDate, r.dueDate, u.name as userName, b.bookName
+        SELECT r.idx, r.userIdx, r.rentDate, r.dueDate, u.name as userName, b.bookName
         from rent r
         join user u 
         on u.idx = r.userIdx
-        join book b
+        left join book b
         on b.idx = r.bookIdx
-        where r.libraryIdx = {$libraryIdx}
+        where (r.libraryIdx = {$libraryIdx} OR b.libraryIdx = {$libraryIdx})
+        and r.status = '대여중'
     ");
 
     $year = $_GET['year'] ?? date('Y');
@@ -64,7 +64,7 @@
                         foreach ($rents as $r) {
                             if ($currentDate >= $r->rentDate && $currentDate <= $r->dueDate) {
                                 echo "<div class='rentData'>";
-                                echo "<a href='/userProfile?idx={$r->idx}'>";
+                                echo "<a href='/userProfile?idx={$r->userIdx}'>";
                                 echo htmlspecialchars($r->userName);
                                 echo "</a>";
                                 echo "</div>";

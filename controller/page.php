@@ -68,7 +68,20 @@ get('/userProfile', function() {
     $idx = $_GET['idx'];
     $user = DB::fetch("SELECT * FROM user WHERE idx = '$idx'");
 
-    views('user/userProfile', compact('user'));
+    $myRents = DB::fetchAll("
+        SELECT
+            l.libraryName,
+            b.bookName,
+            r.rentDate,
+            r.dueDate
+        FROM rent r
+        JOIN book b ON b.idx = r.bookIdx
+        JOIN library l ON l.idx = r.libraryIdx
+        WHERE r.userIdx = $idx
+        AND r.status = '대여중'
+    ");
+
+    views('user/userProfile', compact('user', 'myRents'));
 });
 
 
@@ -203,6 +216,10 @@ post('/deleteBook', function() {
 post('/rentBook', function() {
     extract($_POST);
     $userIdx = ss()->idx;
+
+    if (empty($libraryIdx)) {
+        $libraryIdx = DB::fetch("SELECT libraryIdx FROM book WHERE idx = '$bookIdx'")->libraryIdx ?? 0;
+    }
 
     $beforeRentBook = DB::fetch("
         SELECT COUNT(*) as cnt

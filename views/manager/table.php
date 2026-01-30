@@ -1,15 +1,14 @@
 <?php 
-    $libraryIdxQuery = DB::fetch("SELECT idx from library where managerId = '".ss()->id."' ");
-    $libraryIdx = $libraryIdxQuery->idx;
+    $libraryIdx = ss()->idx;
 
     $rents = DB::fetchAll("
-        SELECT r.idx, r.rentDate, r.dueDate, u.name as userName, b.bookName, r.status
+        SELECT r.idx, r.userIdx, r.rentDate, r.dueDate, u.name as userName, b.bookName, r.status
         from rent r
         join user u 
         on u.idx = r.userIdx
-        join book b
+        left join book b
         on b.idx = r.bookIdx
-        where r.libraryIdx = {$libraryIdx}
+        where (r.libraryIdx = {$libraryIdx} OR b.libraryIdx = {$libraryIdx})
     ");
 ?>
 
@@ -24,7 +23,7 @@
         </tr>
         <?php foreach($rents as $rent): ?>
         <tr>
-            <td><a href="/userProfile?idx=<?= $rent -> idx ?>"><?= $rent -> userName ?></a></td>
+            <td><a href="/userProfile?idx=<?= $rent -> userIdx ?>"><?= $rent -> userName ?></a></td>
             <td><?= $rent -> bookName ?></td>
             <td><?= $rent -> rentDate ?></td>
             <td><?= $rent -> dueDate ?></td>

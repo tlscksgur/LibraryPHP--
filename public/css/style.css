@@ -1,4 +1,4 @@
-*{margin: 0;padding: 0;list-style: none;text-decoration: none;box-sizing: border-box;color: inherit;}
+*{margin: 0;padding: 0;list-style: none;text-decoration: none;box-sizing: border-box;color: inherit;scrollbar-width: none;}
 
 .flex{display: flex;}
 .fxc{display: flex; justify-content: center; align-items: center;}
@@ -18,11 +18,11 @@
 
 body{display: flex; flex-direction: column; width: 100vw; height: 100vh;}
 
-header{display: flex; justify-content: center; align-items: center; width: 100%; height: 80px; background-color: lightseagreen; color: #fff; font-weight: bold;}
+header{display: flex; justify-content: center; align-items: center; width: 100%; height: 80px; margin: 0 auto; background-color: lightseagreen; color: #fff; font-weight: bold;}
 header ul{display: flex; justify-content: space-between; width: max-content;}
 header ul li{padding: 8px;}
 
-main{display: flex; justify-content: center; align-items: center; flex: 1; flex-grow: 1;}
+main{display: flex; justify-content: center; align-items: center; flex: 1; flex-grow: 1; width: 95%; margin: 0 auto;}
 #section{height: 500px;}
 
 footer{width: 100%; height: 80px; background-color: deepskyblue; text-align: center; line-height: 80px; font-weight: bold; font-size: 25px;}
@@ -50,7 +50,7 @@ table, tr, th, td{border: 1px solid;}
 
 
 /* 서점관리자 */
-.bookListSection{display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 auto; width: 80%; height: max-content;}
+.bookListSection{display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0 auto; width: 80%; height: max-content; margin-top: 15px;}
 .bookListContent{display: flex; flex-direction: column; width: 300px; height: max-content; text-align: center; border: 1px solid;}
 .bookListContent div{padding: 10px;}
 .bookListContent img{width: 100px;}
