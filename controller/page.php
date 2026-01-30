@@ -72,13 +72,6 @@ get('/userProfile', function() {
 });
 
 
-// get('/libraryFix', function() {
-//     echo 'HERE'; exit;
-     // $idx = $_GET['idx'];
-     // $lib = DB::fetch("SELECT * FROM library WHERE idx = '$idx'");
-     // views('admin/libraryFix', compact('lib'));
-// });
-
 post('/join', function() {
     extract($_POST);
 
@@ -250,5 +243,4 @@ post('/returnBook', function() {
 
     back('반납되었습니다.');
 });
-
 /* 일반유저 */

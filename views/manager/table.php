@@ -25,10 +25,10 @@
         <?php foreach($rents as $rent): ?>
         <tr>
             <td><a href="/userProfile?idx=<?= $rent -> idx ?>"><?= $rent -> userName ?></a></td>
-            <td><?= $rent ->  bookName ?></td>
-            <td><?= $rent ->  rentDate ?></td>
-            <td><?= $rent ->  dueDate ?></td>
-            <td><?= $rent ->  status ?></td>
+            <td><?= $rent -> bookName ?></td>
+            <td><?= $rent -> rentDate ?></td>
+            <td><?= $rent -> dueDate ?></td>
+            <td><?= $rent -> status ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
