@@ -73,9 +73,21 @@ table, tr, th, td{border: 1px solid;}
 #calendar tr:has(td:not(:empty)){display:table-row;}
 #calendar tr:not(:has(td:not(:empty))){display:none;}
 
-
 /* 표 */
 .tableTable a:hover{text-decoration: underline; color: blue;}
 .tableTable td{padding: 5px;}
 
 /* 서점관리자 */
+
+
+/* 일반회원 */
+
+#librarys{margin: 0 auto; width: 900px; height: 700px; display: grid; grid-template-columns: repeat(4, 1fr); place-items: center; gap: 10px;}
+#librarys img{width: 130px;}
+
+
+#bookRent{width: 800px; height: 650px; display: grid; grid-template-columns: repeat(4, 1fr); place-items: center; gap: 10px; margin: 0 auto;}
+#bookRent .books{width: 250px; height: max-content; padding: 10px; border: 1px solid; border-radius: 10px 2px 10px 2px; text-align: center;}
+#bookRent img{width: 130px;}
+
+/* 일반회원 */

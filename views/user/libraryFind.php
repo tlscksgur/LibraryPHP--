@@ -1,14 +1,9 @@
-<?php $libraryFind = DB::fetchAll("SELECT * FROM library") ?>
-<main class="flex fd">
-    <!-- <legend style="font-weight: bold; font-size: 25px;">도서관</legend> -->
-    <table>
-        <tr>
-            <th>도서관</th>
-        </tr>
-        <?php foreach($libraryFind as $libFind): ?>
-        <tr align="center">
-            <td><?= $libFind -> libraryName ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
+<?php $libraryFind = DB::fetchAll("SELECT idx, libraryName, logo FROM library") ?>
+<main id="librarys">
+    <?php foreach($libraryFind as $libFind): ?>
+    <div class="library lib<?= $libFind->idx ?>">
+        <img src="./uploads/<?= $libFind -> logo ?>">
+        <p class="tac"><a href="/bookRent?idx=<?= $libFind->idx ?>"><?= $libFind -> libraryName ?></a></p>
+    </div>
+    <?php endforeach; ?>
 </main>

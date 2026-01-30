@@ -18,6 +18,12 @@ get('/logout', function() {
 get('/libraryFind', function() {
     views('user/libraryFind');
 });
+get('/bookRent', function() {
+    $libraryIdx = $_GET['idx'];
+    $book = DB::fetchAll("select bookName, bookImg, nowRentCount from book where libraryIdx = '$libraryIdx' ");
+
+    views('user/bookRent', compact('book', 'libraryIdx'));
+});
 
 
 get('/admin', function() {
@@ -42,7 +48,7 @@ get('/table', function() {
 get('/userProfile', function() {
     $idx = $_GET['idx'];
     $user = DB::fetch("SELECT * FROM user WHERE idx = '$idx'");
-    
+
     views('user/userProfile', compact('user'));
 });
 
@@ -178,8 +184,42 @@ post('/deleteBook', function() {
     DB::exec("DELETE FROM book where idx = '$idx'");
     back("책 삭제");
 });
-
-
-
-
 /* 서점 관리자 */
+
+
+/* 일반유저 */
+
+post('/rentBook', function() {
+    extract($_POST);
+    $userIdx = ss()->idx;
+
+    $beforeRentBook = DB::fetch("
+        SELECT COUNT(*) as cnt
+        from rent
+        where userIdx = $userIdx
+        and status = '대여중'
+    ")->cnt;
+
+    if($beforeRentBook >= 1){
+        back('이미 대여 중인 책이 있습니다.');
+        return;
+    }
+
+    $nowCanRentBook = DB::fetch("SELECT * FROM book where idx = '$idx' ");
+
+    if($nowCanRentBook->nowRentCount <= 0){
+        // back('재고가 없는 책입니다.');
+        // return;
+    }
+
+    DB::exec("
+        INSERT INTO
+        rent(userIdx, bookIdx, libraryIdx, rentDate, dueDate, status)
+        values('$userIdx', '$bookIdx', '$libraryIdx', CURDATE(), DATE_ADD(CURDATA(), INTERVAL 7 DAY), '대여중')
+    ");
+
+    DB::exec("UPDATE book set nowRentCount = nowRentCount - 1 where idx = $bookIdx");
+
+});
+
+/* 일반유저 */
