@@ -55,6 +55,8 @@ table, tr, th, td{border: 1px solid;}
 .bookListContent div{padding: 10px;}
 .bookListContent img{width: 100px;}
 
+
+/* 캘린더 */
 #calendar{width: 100vw; height: 100vh; margin: 0 auto;}
 .calendarIn{width: max-content; height: 700px;}
 #calendar #table, tr, th, td{border: 1px solid;}
@@ -65,8 +67,15 @@ table, tr, th, td{border: 1px solid;}
 .currentMonth{font-weight: bold; font-size: 20px;}
 .calendarHeader a{padding: 5px 10px; border: 1px solid; border-radius: 10px;}
 
-.rent{margin-top:5px; padding:3px; background:#eef; font-size:12px;}
+#calendar .rentData{margin-top:5px; padding:3px; background:#eef; font-size:12px;}
+#calendar .rentData:hover{color: blue;}
 
-tr:has(td:not(:empty)){display:table-row;}
-tr:not(:has(td:not(:empty))){display:none;}
+#calendar tr:has(td:not(:empty)){display:table-row;}
+#calendar tr:not(:has(td:not(:empty))){display:none;}
+
+
+/* 표 */
+.tableTable a:hover{text-decoration: underline; color: blue;}
+.tableTable td{padding: 5px;}
+
 /* 서점관리자 */

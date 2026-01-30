@@ -26,7 +26,7 @@
             <li><a href="/">홈으로</a></li>
             <li><a href="/bookAdd">책 등록</a></li>
             <li><a href="/calendar">대여 유저 조회(캘린더)</a></li>
-            <li><a href="/rentUserSelect">대여 유저 조회(표)</a></li>
+            <li><a href="/table">대여 유저 조회(표)</a></li>
             <li>id: <?= ss()->id ?></li>
             <li><a href="/logout">로그아웃</a></li>
 

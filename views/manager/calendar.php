@@ -12,7 +12,6 @@
         where r.libraryIdx = {$libraryIdx}
     ");
 
-
     $year = $_GET['year'] ?? date('Y');
     $month = $_GET['month'] ?? date('m');
     $day = 1;
@@ -64,7 +63,7 @@
 
                         foreach ($rents as $r) {
                             if ($currentDate >= $r->rentDate && $currentDate <= $r->dueDate) {
-                                echo "<div class='rent'>";
+                                echo "<div class='rentData'>";
                                 echo "<a href='/userProfile?idx={$r->idx}'>";
                                 echo htmlspecialchars($r->userName);
                                 echo "</a>";

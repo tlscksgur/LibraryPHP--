@@ -29,8 +29,8 @@ get('/bookAdd', function() {
 get('/calendar', function() {
     views('manager/calendar');
 });
-get('/rentUserSelect', function() {
-    views('manager/rentUserSelect');
+get('/table', function() {
+    views('manager/table');
 });
 
 
