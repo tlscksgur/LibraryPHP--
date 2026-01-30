@@ -20,7 +20,7 @@ get('/libraryFind', function() {
 });
 get('/bookRent', function() {
     $libraryIdx = $_GET['idx'];
-    $book = DB::fetchAll("select bookName, bookImg, nowRentCount from book where libraryIdx = '$libraryIdx' ");
+    $book = DB::fetchAll("select idx, libraryIdx, bookName, bookImg, nowRentCount from book where libraryIdx = '$libraryIdx' ");
 
     views('user/bookRent', compact('book', 'libraryIdx'));
 });
@@ -188,7 +188,6 @@ post('/deleteBook', function() {
 
 
 /* 일반유저 */
-
 post('/rentBook', function() {
     extract($_POST);
     $userIdx = ss()->idx;
@@ -205,21 +204,21 @@ post('/rentBook', function() {
         return;
     }
 
-    $nowCanRentBook = DB::fetch("SELECT * FROM book where idx = '$idx' ");
+    $nowCanRentBook = DB::fetch("SELECT * FROM book where idx = '$bookIdx' ");
 
     if($nowCanRentBook->nowRentCount <= 0){
-        // back('재고가 없는 책입니다.');
-        // return;
+        back('재고가 없는 책입니다.');
+        return;
     }
 
     DB::exec("
         INSERT INTO
         rent(userIdx, bookIdx, libraryIdx, rentDate, dueDate, status)
-        values('$userIdx', '$bookIdx', '$libraryIdx', CURDATE(), DATE_ADD(CURDATA(), INTERVAL 7 DAY), '대여중')
+        values('$userIdx', '$bookIdx', '$libraryIdx', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), '대여중')
     ");
 
     DB::exec("UPDATE book set nowRentCount = nowRentCount - 1 where idx = $bookIdx");
 
+    back('책이 대여되었습니다.');
 });
-
 /* 일반유저 */
