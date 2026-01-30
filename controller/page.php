@@ -24,6 +24,25 @@ get('/bookRent', function() {
 
     views('user/bookRent', compact('book', 'libraryIdx'));
 });
+get('/myPage', function(){
+    $userIdx = ss() -> idx;
+
+    $myRents = DB::fetchAll("
+        SELECT
+            l.libraryName,
+            b.bookName,
+            r.rentDate,
+            r.dueDate,
+            r.idx AS rentIdx
+        FROM rent r
+        JOIN book b ON b.idx = r.bookIdx
+        JOIN library l ON l.idx = r.libraryIdx
+        WHERE r.userIdx = $userIdx
+        AND r.status = '대여중'
+    ");
+
+    views('user/myPage', compact('myRents'));
+});
 
 
 get('/admin', function() {
@@ -221,4 +240,15 @@ post('/rentBook', function() {
 
     back('책이 대여되었습니다.');
 });
+
+post('/returnBook', function() {
+    $returnIdx = $_POST['returnIdx'];
+    $bookIdx = DB::fetch("SELECT * FROM rent where idx = '$returnIdx'")->bookIdx;
+
+    DB::exec("UPDATE rent set status = '반납 됨' where idx = '$returnIdx' ");
+    DB::exec("UPDATE book set nowRentCount = nowRentCount + 1 where idx = '$bookIdx' ");
+
+    back('반납되었습니다.');
+});
+
 /* 일반유저 */
