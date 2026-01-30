@@ -32,8 +32,9 @@
 
         <?php else: ?>
             <li><a href="/">홈으로</a></li>
-            <li><a href="/logout">로그아웃</a></li>
+            <li><a href="/libraryFind">도서관 조회</a></li>
             <li><?= ss()->id ?></li>
+            <li><a href="/logout">로그아웃</a></li>
         <?php endif; ?>
     </ul>
 </header>

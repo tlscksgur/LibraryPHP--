@@ -15,6 +15,11 @@ get('/logout', function() {
 });
 
 
+get('/libraryFind', function() {
+    views('user/libraryFind');
+});
+
+
 get('/admin', function() {
     views('admin/admin');
 });
@@ -37,6 +42,7 @@ get('/table', function() {
 get('/userProfile', function() {
     $idx = $_GET['idx'];
     $user = DB::fetch("SELECT * FROM user WHERE idx = '$idx'");
+    
     views('user/userProfile', compact('user'));
 });
 
