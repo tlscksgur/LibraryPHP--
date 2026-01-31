@@ -57,7 +57,20 @@ get('/bookAdd', function() {
     views('manager/bookAdd');
 });
 get('/calendar', function() {
-    views('manager/calendar');
+    $libraryIdx = ss()->idx;
+
+    $rents = DB::fetchAll("
+        SELECT r.idx, r.userIdx, r.rentDate, r.dueDate, u.name as userName, b.bookName
+        from rent r
+        join user u 
+        on u.idx = r.userIdx
+        left join book b
+        on b.idx = r.bookIdx
+        where (r.libraryIdx = {$libraryIdx} OR b.libraryIdx = {$libraryIdx})
+        and r.status = '대여중'
+    ");
+
+    views('manager/calendar', compact('rents'));
 });
 get('/table', function() {
     views('manager/table');

@@ -1,17 +1,4 @@
 ﻿<?php
-    $libraryIdx = ss()->idx;
-
-    $rents = DB::fetchAll("
-        SELECT r.idx, r.userIdx, r.rentDate, r.dueDate, u.name as userName, b.bookName
-        from rent r
-        join user u 
-        on u.idx = r.userIdx
-        left join book b
-        on b.idx = r.bookIdx
-        where (r.libraryIdx = {$libraryIdx} OR b.libraryIdx = {$libraryIdx})
-        and r.status = '대여중'
-    ");
-
     $year = $_GET['year'] ?? date('Y');
     $month = $_GET['month'] ?? date('m');
     $day = 1;
@@ -50,7 +37,6 @@
                 echo "<tr>";
 
                 for ($col = 0; $col < 7; $col++) {
-
                     if ($row === 0 && $col < $startWeek) {
                         echo "<td></td>";
                     } elseif ($day > $lastDay) {
