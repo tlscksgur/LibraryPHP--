@@ -183,7 +183,7 @@ post('/bookAdd', function() {
         values
         ('$libraryIdx', '$bookName', '$content', '$img', '$count', '$count')
     ");
-    back('책추가!');
+    move('/', '책추가!');
 });
 
 post('/bookFix', function() {
