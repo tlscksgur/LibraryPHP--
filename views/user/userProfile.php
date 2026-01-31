@@ -7,7 +7,7 @@
     <?php endif; ?>
 
     <?php foreach ($myRents as $mr): ?>
-        <div class="myContent">
+        <div class="myContent tac">
             <p>책 제목: <?= $mr -> bookName ?></p>
             <p>대여일: <?= $mr -> rentDate ?></p>
             <p>반납일: <?= $mr -> dueDate ?></p>

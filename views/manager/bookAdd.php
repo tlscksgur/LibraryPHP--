@@ -30,7 +30,10 @@
     </form>
 </main>
 
-<?php $bookList = DB::fetchAll("SELECT * FROM book") ?>
+<?php
+    $libraryIdx = ss()->idx;
+    $bookList = DB::fetchAll("SELECT * FROM book where libraryIdx = '$libraryIdx' ") 
+?>
 <section class="bookListSection">
     <?php foreach($bookList as $BL): ?>
         <div class="bookListContent">
@@ -41,8 +44,8 @@
                 <input type="submit" value="수정"
                 onclick="getValue(
                     <?= $BL->idx ?>,
-                    '<?= htmlspecialchars($BL->bookName, ENT_QUOTES) ?>',
-                    '<?= htmlspecialchars($BL->content, ENT_QUOTES) ?>',
+                    '<?= $BL->bookName ?>',
+                    '<?= $BL->content ?>',
                     <?= $BL->totalCount ?>
                 )">
                 <input type="button" value="삭제" onclick="bookDel(<?= $BL -> idx ?>)">

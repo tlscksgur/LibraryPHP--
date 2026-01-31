@@ -65,7 +65,7 @@
                             if ($currentDate >= $r->rentDate && $currentDate <= $r->dueDate) {
                                 echo "<div class='rentData'>";
                                 echo "<a href='/userProfile?idx={$r->userIdx}'>";
-                                echo htmlspecialchars($r->userName);
+                                echo $r -> userName;
                                 echo "</a>";
                                 echo "</div>";
                             }
