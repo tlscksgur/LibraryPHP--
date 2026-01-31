@@ -5,13 +5,16 @@
         SELECT *
         FROM user
         WHERE idx != $myIdx
-        AND (cate = 'manager' OR cate = '')
+        AND cate = 'manager' OR cate = ''
     ");
     $managerList = DB::fetchAll("
-        SELECT *
+        SELECT name
         FROM user
         WHERE idx != $myIdx
         AND cate = 'manager'
+        UNION
+        select managerId
+        from library
     ");
 ?>
 
